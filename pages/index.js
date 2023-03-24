@@ -61,11 +61,10 @@ export default function Home() {
               offeredCourses={offeredCourses}
               setOfferedCourses={setOfferedCourses}
           />
-          <main className="bg-[#8EB8E5] h-screen">
-              <div className="bg-[#8EB8E5] py-20 px-40 grid grid-cols-6 gap-x-12 gap-y-12">
+          <main className="bg-slate-500 h-screen">
+              <div className="bg-slate-500 py-20 px-40 grid grid-cols-4 gap-x-44 gap-y-12">
                   {renderCourseList}
               </div>
           </main>
       </>
-  )
-}
+  )}
