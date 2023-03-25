@@ -13,6 +13,7 @@ export default function Sidebar(props) {
                                         <option value="Computer">Computer</option>
                                         <option value="Biomedical">Biomedical</option>
                                         <option value="Mechanical">Mechanical</option>
+                                        <option value="Civil">Civil</option>
                                 </select>
                                 </span>
                             </div>
@@ -41,10 +42,11 @@ export default function Sidebar(props) {
                             <div className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white">
                                 <span className="flex-1 ml-3 whitespace-nowrap">
                                     <label className="relative inline-flex items-center cursor-pointer">
-                                        <input type="checkbox" value="" className="sr-only peer" checked={props.offeredCourses} onChange={() => props.setOfferedCourses(!props.offeredCourses)} />
-                                        <div className="w-14 h-7 bg-slate-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-slate-600 dark:peer-focus:ring-slate-600 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all dark:border-gray-600 peer-checked:bg-slate-500"></div>
-                                        <span className="ml-3 text-xl text-slate-200 dark:text-gray-300">
-                                            {props.offeredCourses ? 'Offered' : 'All'}
+                                        <input type="checkbox" className="sr-only peer" checked={props.offeredCourses} onChange={() => props.setOfferedCourses(!props.offeredCourses)} />
+                                        <div className="w-12 h-6 bg-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-slate-600 dark:peer-focus:ring-slate-600 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-1 after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-500"></div>
+                                        {/*<div className={"w-12 h-6 bg-slate-200 rounded-full peer peer-checked:bg-green-500"}></div>*/}
+                                        <span className="ml-3 text-lg text-slate-200 dark:text-gray-300">
+                                            Offered
                                         </span>
                                     </label>
                                 </span>
