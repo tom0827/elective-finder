@@ -10,6 +10,15 @@ export default function CourseTable(props) {
 
             return (
                 <tr key={courseName} className={"bg-white border-b dark:bg-gray-800 dark:border-gray-700"}>
+                    <td className="pl-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        <a href={course[courseName]['link']} target={"_blank"}>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
+                                 stroke="currentColor" className="w-5 h-5 text-blue-500">
+                                <path strokeLinecap="round" strokeLinejoin="round"
+                                      d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+                            </svg>
+                        </a>
+                    </td>
                     <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                         {courseName}
                     </td>
@@ -19,23 +28,23 @@ export default function CourseTable(props) {
                     <td className={"px-6 py-4 flex justify-center"}>
                         {course[courseName]['is_offered'] ?
                             <span className={"text-green-500"}>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                     strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5"/>
-                                </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                 strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5"/>
+                            </svg>
 
-                            </span>
+                        </span>
                             : <span className={"text-red-500"}>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                     strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12"/>
-                                </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                 strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                            </svg>
 
-                            </span>}
+                        </span>}
                     </td>
                     <td className={"px-6 py-4"}>
-                        {course[courseName]['description']}
-                    </td>
+                            {course[courseName]['description']}
+                        </td>
                 </tr>
             )
 
@@ -48,6 +57,9 @@ export default function CourseTable(props) {
                 <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead className="sticky top-20 text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
+                        <th scope={"col"} className={"sr-only"}>
+                            Link
+                        </th>
                         <th scope={"col"} className={"px-6 py-6"}>
                             Course
                         </th>

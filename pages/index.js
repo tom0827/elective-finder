@@ -51,11 +51,14 @@ export default function Home() {
               setOfferedCourses={setOfferedCourses}
           />
           <main className="bg-gray-200 h-screen absolute left-64">
-             <CourseTable
-                 courses={courses}
-                 program={program}
-                 offeredCourses={offeredCourses}
-             />
+              {courses.length === 0 ? <div/> :
+                  <CourseTable
+                      courses={courses}
+                      program={program}
+                      offeredCourses={offeredCourses}
+                  />
+              }
+
           </main>
       </>
   )}
