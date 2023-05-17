@@ -34,6 +34,7 @@ export default function Sidebar(props) {
                                 <span className="flex-1 ml-3 whitespace-nowrap">
                                       <select className="w-40 rounded-lg px-2 py-1" value={props.selectedTerm} onChange={(e) => props.setSelectedTerm(e.target.value)}>
                                         <option value="202305">Summer 2023</option>
+                                        <option value="202309">Fall 2023</option>
                                       </select>
                                 </span>
                             </div>
