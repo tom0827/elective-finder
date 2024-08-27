@@ -82,11 +82,14 @@ export const CourseProvider = ({ children }: { children: JSX.Element | JSX.Eleme
     useEffect(() => {
         const fetchCourses = async () => {
             try {
-              const response = await fetch('/api/courses');
-              if (!response.ok) {
-                throw new Error('Network response was not ok');
-              }
+              const response = await fetch('/api/courses', {
+                next: {
+                    revalidate: 3600,
+                }
+              });
               const data = await response.json();
+              const cacheStatus = response.headers.get('x-next-cache');
+              console.log('Cache status:', cacheStatus); // This will log 'HIT' or 'MISS'
               return data;
             } catch (error) {
               console.error('Error fetching courses:');
