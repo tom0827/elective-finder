@@ -9,6 +9,7 @@ export async function GET() {
   const now = Date.now();
 
   if (cache && cacheTime && (now - cacheTime < CACHE_DURATION_MS)) {
+    console.log("returning cached")
     return NextResponse.json(cache);
   }
 
@@ -16,5 +17,6 @@ export async function GET() {
   cache = courses;
   cacheTime = now;
 
+  console.log("returning new")
   return NextResponse.json(courses);
 }
