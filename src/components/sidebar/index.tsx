@@ -1,11 +1,18 @@
 "use client"
 import { Box, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, Switch } from "@mui/material"
-import { useContext } from "react"
+import { useContext, useEffect } from "react"
 import { CourseContext } from "../courses/CourseContext";
 import { SELECT_ALL_OPTION } from "../../constants/util";
 
 const Sidebar = () => {
     const { isOffered, setIsOffered, selectedProgram, setSelectedProgram, programOptions, electiveOptions, setSelectedElective, termOptions, setSelectedTerm, selectedElective, selectedTerm } = useContext(CourseContext);
+    
+    useEffect(() => {
+        if(selectedElective == "COMPLEMENTARY") {
+            setSelectedProgram('All')
+        }
+    }, [selectedElective, setSelectedProgram])
+    
     return (
       <Box sx={{ height: '100vh', backgroundColor: "#78A083", paddingX: 4 }}>
         <Grid container spacing={2} sx={{ paddingTop: 4 }}>
@@ -16,6 +23,7 @@ const Sidebar = () => {
             <Grid item xs={12}>
                 <InputLabel>Program</InputLabel>
                 <Select
+                disabled={selectedElective=="COMPLEMENTARY"}
                 fullWidth
                 value={selectedProgram}
                 onChange={(event: SelectChangeEvent) => setSelectedProgram(event.target.value)}
