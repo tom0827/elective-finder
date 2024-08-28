@@ -1,5 +1,5 @@
 "use client";
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, IconButton, Modal, Box, Typography } from "@mui/material";
+import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, IconButton, Modal, Box } from "@mui/material";
 import { Course } from "../../models/course";
 import { useContext, useMemo, useState } from "react";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
