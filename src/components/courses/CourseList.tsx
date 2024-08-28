@@ -1,7 +1,7 @@
-"use client"
-import { Box, Grid } from '@mui/material';
-import Sidebar from '../sidebar';
-import CourseTable from './CourseTable';
+"use client";
+import { Grid } from "@mui/material";
+import Sidebar from "../sidebar";
+import CourseTable from "./CourseTable";
 
 const CourseList = () => {
   return (
@@ -13,7 +13,7 @@ const CourseList = () => {
         <CourseTable />
       </Grid>
     </Grid>
-  )
-}
+  );
+};
 
 export default CourseList;

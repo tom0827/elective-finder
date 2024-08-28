@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { CourseProvider } from "./CourseContext";
 import CourseList from "./CourseList";
 
@@ -7,7 +7,7 @@ const Courses = () => {
     <CourseProvider>
       <CourseList />
     </CourseProvider>
-  )
-}
+  );
+};
 
 export default Courses;

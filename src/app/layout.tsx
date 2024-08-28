@@ -14,8 +14,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" style={{ padding: 0, margin: 0 }}>
-      <body className={inter.className} style={{ padding: 0, margin: 0 }}>{children}</body>
+    <html lang="en" style={{
+      padding: 0,
+      margin: 0, 
+    }}>
+      <body className={inter.className} style={{
+        padding: 0,
+        margin: 0, 
+      }}>{children}</body>
     </html>
   );
 }
