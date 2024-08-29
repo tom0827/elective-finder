@@ -54,14 +54,46 @@ export const CourseProvider = ({ children }: { children: JSX.Element | JSX.Eleme
   const [selectedElective, setSelectedElective] = useState<string>("All");
   const [selectedTerm, setSelectedTerm] = useState<string>("202409");
   const [loading, setLoading] = useState<boolean>(true);
+
+  const fetchFreshCourses = async () => {
+    const baseUrl = process.env.NEXT_PUBLIC_FUNCTIONS_URL || "";
+    const res = await fetch(`${baseUrl}/getCourses`);
+    const data = await res.json();
+    return data;
+  };
+
+  const storeCoursesInLocalStorage = (data: Course[]) => {
+    const entryToCache = {
+      "data": data,
+      "timestamp": Date.now(), 
+    };
+    localStorage.setItem("courses", JSON.stringify(entryToCache));
+  };
   
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const baseUrl = process.env.NEXT_PUBLIC_FUNCTIONS_URL || "";
-        const res = await fetch(`${baseUrl}/getCourses`);
-        const data = await res.json();
-        return data;
+        const cacheHit = localStorage.getItem("courses");
+
+        if (!cacheHit) {
+          const data = await fetchFreshCourses();
+          storeCoursesInLocalStorage(data);
+          return data;
+        }
+
+        const cachedEntry = JSON.parse(cacheHit);
+
+        const dataAge = Date.now() - cachedEntry.timestamp;
+        const oneDayInMs = 24 * 60 * 60 * 1000;
+
+        if (dataAge > oneDayInMs) {
+          const data = await fetchFreshCourses();
+          storeCoursesInLocalStorage(data);
+          return data;
+        }
+
+        return cachedEntry.data;
+         
       } catch (error) {
         console.error("Error fetching courses:");
       }
