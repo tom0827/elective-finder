@@ -58,8 +58,9 @@ export const CourseProvider = ({ children }: { children: JSX.Element | JSX.Eleme
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const response = await fetch("/api/courses");
-        const data = await response.json();
+        const baseUrl = process.env.NEXT_PUBLIC_FUNCTIONS_URL || "";
+        const res = await fetch(`${baseUrl}/getCourses`);
+        const data = await res.json();
         return data;
       } catch (error) {
         console.error("Error fetching courses:");

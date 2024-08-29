@@ -1,4 +1,4 @@
-import { getCourses } from "@/utils/firebase/firebaseutils";
+import { getCourses } from "../../../../supabase/courses";
 import { NextResponse } from "next/server";
 
 export async function GET() {
