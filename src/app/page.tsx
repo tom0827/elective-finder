@@ -27,7 +27,7 @@ export default function Courses() {
         }}/>
         <Modal open={isMobile}>
           <Box sx={style}>
-         Elective Finder mobile support is coming soon!
+         ElectiveFinder mobile support is coming soon!
           </Box>
         </Modal></>
     );
