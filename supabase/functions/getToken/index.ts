@@ -30,7 +30,7 @@ const newToken = async () => {
   return token;
 };
 
-const SECRET: string = String(Deno.env.get("JWT_SUPABASE")!);
+const SECRET: string = String(Deno.env.get("JWT_SECRET")!);
 const ALLOWED_ORIGINS = String(Deno.env.get("ALLOWED_ORIGINS")!).split(",");
 
 Deno.serve(async (req) => {

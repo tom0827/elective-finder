@@ -3,7 +3,7 @@ import { getCorsHeaders } from "../_shared/cors.ts";
 import { verify } from "https://deno.land/x/djwt@v3.0.2/mod.ts";
 
 const supabase = createClient(Deno.env.get("DB_URL")!, Deno.env.get("DB_ANON_KEY")!);
-const secret: string = String(Deno.env.get("JWT_SUPABASE")!);
+const secret: string = String(Deno.env.get("JWT_SECRET")!);
 
 const handleVerify = async (token: string, secret: string) => {
   const key = await crypto.subtle.importKey(
