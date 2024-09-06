@@ -8,7 +8,7 @@ const newToken = async () => {
   };
 
   const now = Math.floor(Date.now() / 1000);
-  const exp = now + 15;
+  const exp = now + 300;
 
   const payload = {
     iat: now,
@@ -56,9 +56,9 @@ Deno.serve(async (req) => {
       `authToken=${token}`,
       "HttpOnly",
       "Secure",
-      "SameSite=Strict",
+      "SameSite=None",
       "Path=/",
-      "Max-Age=15",
+      "Max-Age=300",
     ].join("; ");
 
     return new Response(
