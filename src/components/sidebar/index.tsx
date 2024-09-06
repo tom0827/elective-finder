@@ -58,6 +58,7 @@ const Sidebar = () => {
             value={selectedTerm}
             onChange={(event: SelectChangeEvent) => setSelectedTerm(event.target.value)}
           >
+            <MenuItem value={SELECT_ALL_OPTION.value}>{SELECT_ALL_OPTION.label}</MenuItem>
             {termOptions.map((option) => {
               return <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>;
             })}
