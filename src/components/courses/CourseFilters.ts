@@ -20,7 +20,7 @@ const filterElectiveTypes = (courses: Course[], selectedElective: string) => {
 };
 
 const filterTerm = (courses: Course[], selectedTerm: string) => {
-  if (!courses.length) return courses;
+  if (!courses.length || selectedTerm == SELECT_ALL_OPTION.value) return courses;
   return courses.filter((course) => course.term == selectedTerm);
 };
 

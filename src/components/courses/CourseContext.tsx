@@ -5,6 +5,8 @@ import { formatDateAsMonthYear } from "../../utils/date";
 import { SelectItem } from "../../models/select";
 import { titleCase } from "../../utils/string";
 import { filterOffered, filterProgram, filterElectiveTypes, filterTerm } from "./CourseFilters";
+import { AppConfig } from "@/config";
+import { fetchCookies } from "@/utils/cookies";
 
 interface CourseContextProps {
     filteredCourses: Course[] | null;
@@ -52,12 +54,13 @@ export const CourseProvider = ({ children }: { children: JSX.Element | JSX.Eleme
   const [isOffered, setIsOffered] = useState<boolean>(true);
   const [selectedProgram, setSelectedProgram] = useState<string>("All");
   const [selectedElective, setSelectedElective] = useState<string>("All");
-  const [selectedTerm, setSelectedTerm] = useState<string>("202409");
+  const [selectedTerm, setSelectedTerm] = useState<string>("All");
   const [loading, setLoading] = useState<boolean>(true);
 
   const fetchFreshCourses = async () => {
-    const baseUrl = process.env.NEXT_PUBLIC_FUNCTIONS_URL || "";
-    const res = await fetch(`${baseUrl}/getCourses`);
+    const res = await fetch(`${AppConfig.functionsUrl}/getCourses`, 
+      { credentials: "include" }
+    );
     const data = await res.json();
     return data;
   };
@@ -70,40 +73,37 @@ export const CourseProvider = ({ children }: { children: JSX.Element | JSX.Eleme
     localStorage.setItem("courses", JSON.stringify(entryToCache));
   };
   
-  useEffect(() => {
-    const fetchCourses = async () => {
-      try {
-        const cacheHit = localStorage.getItem("courses");
-
-        if (!cacheHit) {
-          const data = await fetchFreshCourses();
-          storeCoursesInLocalStorage(data);
-          return data;
-        }
-
-        const cachedEntry = JSON.parse(cacheHit);
-
-        const dataAge = Date.now() - cachedEntry.timestamp;
-        const oneDayInMs = 24 * 60 * 60 * 1000;
-
-        if (dataAge > oneDayInMs) {
-          const data = await fetchFreshCourses();
-          storeCoursesInLocalStorage(data);
-          return data;
-        }
-
-        return cachedEntry.data;
-         
-      } catch (error) {
-        console.error("Error fetching courses:");
+  const getCourses = async () => {
+    try {
+      const cacheHit = localStorage.getItem("courses");
+      const oneDayInMs = 24 * 60 * 60 * 1000;
+      const isCacheValid = cacheHit && (Date.now() - JSON.parse(cacheHit).timestamp <= oneDayInMs);
+  
+      if (isCacheValid) {
+        return JSON.parse(cacheHit).data;
       }
+
+      await fetchCookies();
+      const data = await fetchFreshCourses();
+      storeCoursesInLocalStorage(data);
+      return data;
+  
+    } catch (error) {
+      console.error("Error fetching courses:");
+    }
+  };
+
+  useEffect(() => {
+    const loadCourses = async () => {
+      const fetchedCourses = await getCourses();
+      setCourses(fetchedCourses);
     };
-    fetchCourses().then((courses) => {
-      setCourses(courses as unknown as Course[]);
+    loadCourses().then(() => {
       setLoading(false);
     });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
+  
   useEffect(() => {
     let filteredCourses: Course[] = courses;
     filteredCourses = filterOffered(filteredCourses, isOffered);
