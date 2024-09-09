@@ -51,8 +51,11 @@ const CourseTable = () => {
 
   return (
     <>
-      <TableContainer component={Paper}>
-        <Table>
+      <TableContainer component={Paper} sx={{
+        maxHeight: "calc(100vh - 52px)",
+        overflowY: "auto", 
+      }}>
+        <Table stickyHeader>
           <TableHead>
             <TableRow>
               <TableCell align='center' sx={{
@@ -131,7 +134,7 @@ const CourseTable = () => {
         </Table>
       </TableContainer>
       <TablePagination
-        rowsPerPageOptions={[5, 10]} 
+        rowsPerPageOptions={[5, 10, 50]} 
         component={"div"} 
         count={filteredCourses?.length || 0} 
         rowsPerPage={rowsPerPage} 
