@@ -48,9 +48,9 @@ Deno.serve(async (req) => {
 
     if (courseRes?.error) {
       return new Response(
-        JSON.stringify(courseRes.error),
+        JSON.stringify(courseRes?.error),
         {
-          status: courseRes.status,
+          status: courseRes?.status,
           headers: {
             ...corsHeaders,
             "Content-Type": "application/json", 
@@ -60,7 +60,7 @@ Deno.serve(async (req) => {
     }
 
     return new Response(
-      JSON.stringify(courseRes.data),
+      JSON.stringify(courseRes?.data),
       {
         status: 200,
         headers: {
