@@ -9,9 +9,9 @@ const filterOffered = (courses: Course[], isOffered: boolean) => {
   else return courses;
 };
 
-const filterProgram = (courses: Course[], selectedProgram: string) => {
-  if (!courses.length || selectedProgram == SELECT_ALL_OPTION.value) return courses;
-  return courses.filter((course) => course.program == selectedProgram);
+const filterProgram = (courses: Course[], selectedProgram: string, selectedElective: string) => {
+  if (!courses.length || selectedProgram == SELECT_ALL_OPTION.value || selectedElective == "COMPLEMENTARY") return courses;
+  return courses.filter((course) => course.program == selectedProgram || course.program == "ALL");
 };
 
 const filterElectiveTypes = (courses: Course[], selectedElective: string) => {

@@ -1,4 +1,4 @@
 export const SELECT_ALL_OPTION = {
-  value: "All",
-  label: "All", 
+  value: "ALL",
+  label: "ALL", 
 };
