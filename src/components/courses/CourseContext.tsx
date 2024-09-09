@@ -52,9 +52,9 @@ export const CourseProvider = ({ children }: { children: JSX.Element | JSX.Eleme
   const [courses, setCourses] = useState<Course[]>([]);
   const [filteredCourses, setFilteredCourses] = useState<Course[]>([]);
   const [isOffered, setIsOffered] = useState<boolean>(true);
-  const [selectedProgram, setSelectedProgram] = useState<string>("All");
-  const [selectedElective, setSelectedElective] = useState<string>("All");
-  const [selectedTerm, setSelectedTerm] = useState<string>("All");
+  const [selectedProgram, setSelectedProgram] = useState<string>("");
+  const [selectedElective, setSelectedElective] = useState<string>("ALL");
+  const [selectedTerm, setSelectedTerm] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
 
   const fetchFreshCourses = async () => {
@@ -107,7 +107,7 @@ export const CourseProvider = ({ children }: { children: JSX.Element | JSX.Eleme
   useEffect(() => {
     let filteredCourses: Course[] = courses;
     filteredCourses = filterOffered(filteredCourses, isOffered);
-    filteredCourses = filterProgram(filteredCourses, selectedProgram);
+    filteredCourses = filterProgram(filteredCourses, selectedProgram, selectedElective);
     filteredCourses = filterElectiveTypes(filteredCourses, selectedElective);
     filteredCourses = filterTerm(filteredCourses, selectedTerm);
     setFilteredCourses(filteredCourses);
@@ -139,6 +139,16 @@ export const CourseProvider = ({ children }: { children: JSX.Element | JSX.Eleme
       }));
     return uniquePrograms;
   }, [courses]);
+
+  useEffect(() => {
+    if (!programOptions.length) return;
+    setSelectedProgram(programOptions[0].value ?? "");
+  }, [programOptions]);
+
+  useEffect(() => {
+    if (!termOptions.length) return;
+    setSelectedTerm(termOptions[0].value ?? "");
+  }, [termOptions]);
 
   return (
     <CourseContext.Provider value={{ 

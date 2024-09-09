@@ -30,7 +30,7 @@ const CourseTable = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [preCoReqHtml, setPreCoRegHtml] = useState<string>("");
   const [page, setPage] = useState<number>(0);
-  const [rowsPerPage, setRowsPerPage] = useState<number>(5);
+  const [rowsPerPage, setRowsPerPage] = useState<number>(10);
 
   const handlePageChange = (event: unknown, newPage: number) => {
     setPage(newPage);
@@ -53,7 +53,7 @@ const CourseTable = () => {
     <>
       <TableContainer component={Paper} sx={{
         maxHeight: "calc(100vh - 52px)",
-        overflowY: "auto", 
+        overflowY: "auto",
       }}>
         <Table stickyHeader>
           <TableHead>
@@ -77,7 +77,7 @@ const CourseTable = () => {
               <TableCell align='center' sx={{
                 fontWeight: "bold",
                 width: 150, 
-              }}>See pre and co requisites</TableCell>
+              }}>View Prerequisites</TableCell>
               <TableCell align='center' sx={{
                 fontWeight: "bold",
                 width: 150, 
@@ -112,7 +112,7 @@ const CourseTable = () => {
                       </IconButton>
                     </Then>
                     <Else>
-                        No pre/co requisites
+                        No Prerequisites
                     </Else>
                   </If>
                 </TableCell>
@@ -134,7 +134,7 @@ const CourseTable = () => {
         </Table>
       </TableContainer>
       <TablePagination
-        rowsPerPageOptions={[5, 10, 50]} 
+        rowsPerPageOptions={[5, 10, 25]} 
         component={"div"} 
         count={filteredCourses?.length || 0} 
         rowsPerPage={rowsPerPage} 
