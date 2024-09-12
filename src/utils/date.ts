@@ -11,3 +11,10 @@ export const formatDateAsMonthYear = (dateStr: string) => {
   
   return `${monthName} ${year}`;
 };
+
+export const isExpired = (cachedDate: Date, expireInTime: number) => {
+  const cacheTimestamp = new Date(cachedDate).getTime(); // Convert ISO string to timestamp
+  const now = Date.now();
+
+  return now - cacheTimestamp > expireInTime;
+};

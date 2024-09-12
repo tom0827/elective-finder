@@ -11,5 +11,5 @@ declare global {
 const FUNCTIONS_URL =  process.env.NEXT_PUBLIC_FUNCTIONS_URL || "";
 
 export const AppConfig = {
-  functionsUrl: FUNCTIONS_URL,
+  functionsURL: FUNCTIONS_URL,
 };
