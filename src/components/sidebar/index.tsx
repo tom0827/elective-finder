@@ -1,8 +1,10 @@
 "use client";
-import { Box, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, Switch } from "@mui/material";
+import Grid from "@mui/material/Grid2";
+import { InputLabel, MenuItem, Select, SelectChangeEvent, Switch, useColorScheme, Box } from "@mui/material";
 import { useContext } from "react";
 import { CourseContext } from "../courses/CourseContext";
 import { SELECT_ALL_OPTION } from "../../constants/util";
+import { LightDarkSwitch } from "../shared/StyledSwitch";
 
 const Sidebar = () => {
   const { 
@@ -18,19 +20,26 @@ const Sidebar = () => {
     selectedElective,
     selectedTerm,
   } = useContext(CourseContext);
+  const { mode, setMode } = useColorScheme();
     
   return (
-    <Box sx={{
-      height: "100vh",
-      backgroundColor: "#78A083",
-      paddingX: 4, 
-    }}>
-      <Grid container spacing={2} sx={{ paddingTop: 4 }}>
-        <Grid item xs={12}>
+    // <Box sx={{
+    //   height: "100vh",
+    //   paddingX: 4, 
+    //   backgroundColor: "background.default",
+    // }}>
+    <>
+      <Grid container direction={"column"} spacing={2} sx={{
+        paddingTop: 4,
+        height: "100vh",
+        paddingX: 4,
+        backgroundColor: "background.default", 
+      }}>
+        <Grid size={{ xs: 12 }}>
           <InputLabel>Offered</InputLabel>
           <Switch defaultChecked value={isOffered} onChange={() => setIsOffered(!isOffered)}/>
         </Grid>
-        <Grid item xs={12}>
+        <Grid size={{ xs: 12 }}>
           <InputLabel>Program</InputLabel>
           <Select
             fullWidth
@@ -42,7 +51,7 @@ const Sidebar = () => {
             })}
           </Select>
         </Grid>
-        <Grid item xs={12}>
+        <Grid size={{ xs: 12 }}>
           <InputLabel>Elective Type</InputLabel>
           <Select
             fullWidth
@@ -55,7 +64,7 @@ const Sidebar = () => {
             })}
           </Select>
         </Grid>
-        <Grid item xs={12}>
+        <Grid size={{ xs: 12 }}>
           <InputLabel>Term</InputLabel>
           <Select
             fullWidth
@@ -67,8 +76,30 @@ const Sidebar = () => {
             })}
           </Select>
         </Grid>
+        <Grid size={{ xs: 12 }} sx={{
+          flexGrow: 1,
+        }} />
+        <Grid size={{ xs: 12 }} sx={{ paddingBottom: 4 }}>
+          <LightDarkSwitch defaultChecked value={mode} onChange={() => {
+            const isDark = mode === "dark";
+            setMode(isDark ? "light" : "dark");
+          }}/>
+        </Grid> 
+        
       </Grid>
-    </Box>
+      {/* <Grid container direction={"column"} sx={{
+        alignContent: "flex-end",
+        backgroundColor: "red", 
+      }}>
+        <Grid size={{ xs: 12 }}>
+          <LightDarkSwitch defaultChecked value={mode} onChange={() => {
+            const isDark = mode === "dark";
+            setMode(isDark ? "light" : "dark");
+          }}/>
+        </Grid> 
+      </Grid> */}
+    </>
+    // </Box>
   );
 };
   
