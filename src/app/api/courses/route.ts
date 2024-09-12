@@ -23,7 +23,6 @@ export async function GET() {
 
     if (!cache?.timestamp || isExpired(cache.timestamp, CACHE_DURATION))
     {
-      console.log("FRESH");
       const res = await getFreshCourses(supabase);
       data = res.data as Course[];
       cache.data = res.data as Course[];
