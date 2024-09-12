@@ -1,6 +1,6 @@
 "use client";
 import Grid from "@mui/material/Grid2";
-import { InputLabel, MenuItem, Select, SelectChangeEvent, Switch, useColorScheme, Box } from "@mui/material";
+import { InputLabel, MenuItem, Select, SelectChangeEvent, Switch, useColorScheme } from "@mui/material";
 import { useContext } from "react";
 import { CourseContext } from "../courses/CourseContext";
 import { SELECT_ALL_OPTION } from "../../constants/util";
