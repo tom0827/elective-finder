@@ -134,6 +134,9 @@ const CourseTable = () => {
         </Table>
       </TableContainer>
       <TablePagination
+        sx={{ 
+          backgroundColor: "background.default",
+        }}
         rowsPerPageOptions={[5, 10, 25]} 
         component={"div"} 
         count={filteredCourses?.length || 0} 
