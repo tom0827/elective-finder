@@ -2,9 +2,8 @@
 import useDeviceType from "@/hooks/deviceType";
 import { CourseProvider } from "../components/courses/CourseContext";
 import CourseList from "../components/courses/CourseList";
-import { Box, MenuItem, Modal, Select } from "@mui/material";
-import { ThemeProvider, createTheme, useColorScheme } from "@mui/material/styles";
-import { useEffect } from "react";
+import { Box, Modal } from "@mui/material";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 
 const style = {
@@ -17,31 +16,6 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
-
-{/* <Box
-          sx={{
-            display: "flex",
-            width: "100%",
-            alignItems: "center",
-            justifyContent: "center",
-            bgcolor: "background.default",
-            color: "text.primary",
-            borderRadius: 1,
-            p: 3,
-            minHeight: "56px",
-          }}
-        >
-          <Select
-            value={mode}
-            onChange={(event) =>
-              setMode(event.target.value as "system" | "light" | "dark")
-            }
-          >
-            <MenuItem value="system">System</MenuItem>
-            <MenuItem value="light">Light</MenuItem>
-            <MenuItem value="dark">Dark</MenuItem>
-          </Select>
-        </Box> */}
 
 const theme = createTheme({
   colorSchemes: {

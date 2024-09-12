@@ -23,83 +23,63 @@ const Sidebar = () => {
   const { mode, setMode } = useColorScheme();
     
   return (
-    // <Box sx={{
-    //   height: "100vh",
-    //   paddingX: 4, 
-    //   backgroundColor: "background.default",
-    // }}>
-    <>
-      <Grid container direction={"column"} spacing={2} sx={{
-        paddingTop: 4,
-        height: "100vh",
-        paddingX: 4,
-        backgroundColor: "background.default", 
-      }}>
-        <Grid size={{ xs: 12 }}>
-          <InputLabel>Offered</InputLabel>
-          <Switch defaultChecked value={isOffered} onChange={() => setIsOffered(!isOffered)}/>
-        </Grid>
-        <Grid size={{ xs: 12 }}>
-          <InputLabel>Program</InputLabel>
-          <Select
-            fullWidth
-            value={selectedProgram}
-            onChange={(event: SelectChangeEvent) => setSelectedProgram(event.target.value)}
-          >
-            {programOptions.map((option) => {
-              return <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>;
-            })}
-          </Select>
-        </Grid>
-        <Grid size={{ xs: 12 }}>
-          <InputLabel>Elective Type</InputLabel>
-          <Select
-            fullWidth
-            value={selectedElective}
-            onChange={(event: SelectChangeEvent) => setSelectedElective(event.target.value)}
-          >
-            <MenuItem value={SELECT_ALL_OPTION.value}>{SELECT_ALL_OPTION.label}</MenuItem>
-            {electiveOptions.map((option) => {
-              return <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>;
-            })}
-          </Select>
-        </Grid>
-        <Grid size={{ xs: 12 }}>
-          <InputLabel>Term</InputLabel>
-          <Select
-            fullWidth
-            value={selectedTerm}
-            onChange={(event: SelectChangeEvent) => setSelectedTerm(event.target.value)}
-          >
-            {termOptions.map((option) => {
-              return <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>;
-            })}
-          </Select>
-        </Grid>
-        <Grid size={{ xs: 12 }} sx={{
-          flexGrow: 1,
-        }} />
-        <Grid size={{ xs: 12 }} sx={{ paddingBottom: 4 }}>
-          <LightDarkSwitch defaultChecked value={mode} onChange={() => {
-            const isDark = mode === "dark";
-            setMode(isDark ? "light" : "dark");
-          }}/>
-        </Grid> 
-        
+    <Grid container direction={"column"} spacing={2} sx={{
+      paddingTop: 4,
+      height: "100vh",
+      paddingX: 4,
+      backgroundColor: "background.default", 
+    }}>
+      <Grid size={{ xs: 12 }}>
+        <InputLabel>Offered</InputLabel>
+        <Switch defaultChecked value={isOffered} onChange={() => setIsOffered(!isOffered)}/>
       </Grid>
-      {/* <Grid container direction={"column"} sx={{
-        alignContent: "flex-end",
-        backgroundColor: "red", 
-      }}>
-        <Grid size={{ xs: 12 }}>
-          <LightDarkSwitch defaultChecked value={mode} onChange={() => {
-            const isDark = mode === "dark";
-            setMode(isDark ? "light" : "dark");
-          }}/>
-        </Grid> 
-      </Grid> */}
-    </>
-    // </Box>
+      <Grid size={{ xs: 12 }}>
+        <InputLabel>Program</InputLabel>
+        <Select
+          fullWidth
+          value={selectedProgram}
+          onChange={(event: SelectChangeEvent) => setSelectedProgram(event.target.value)}
+        >
+          {programOptions.map((option) => {
+            return <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>;
+          })}
+        </Select>
+      </Grid>
+      <Grid size={{ xs: 12 }}>
+        <InputLabel>Elective Type</InputLabel>
+        <Select
+          fullWidth
+          value={selectedElective}
+          onChange={(event: SelectChangeEvent) => setSelectedElective(event.target.value)}
+        >
+          <MenuItem value={SELECT_ALL_OPTION.value}>{SELECT_ALL_OPTION.label}</MenuItem>
+          {electiveOptions.map((option) => {
+            return <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>;
+          })}
+        </Select>
+      </Grid>
+      <Grid size={{ xs: 12 }}>
+        <InputLabel>Term</InputLabel>
+        <Select
+          fullWidth
+          value={selectedTerm}
+          onChange={(event: SelectChangeEvent) => setSelectedTerm(event.target.value)}
+        >
+          {termOptions.map((option) => {
+            return <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>;
+          })}
+        </Select>
+      </Grid>
+      <Grid size={{ xs: 12 }} sx={{
+        flexGrow: 1,
+      }} />
+      <Grid size={{ xs: 12 }} sx={{ paddingBottom: 4 }}>
+        <LightDarkSwitch defaultChecked value={mode} onChange={() => {
+          const isDark = mode === "dark";
+          setMode(isDark ? "light" : "dark");
+        }}/>
+      </Grid> 
+    </Grid>
   );
 };
   
