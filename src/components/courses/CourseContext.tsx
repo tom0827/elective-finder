@@ -5,8 +5,6 @@ import { formatDateAsMonthYear } from "../../utils/date";
 import { SelectItem } from "../../models/select";
 import { titleCase } from "../../utils/string";
 import { filterOffered, filterProgram, filterElectiveTypes, filterTerm } from "./CourseFilters";
-import { AppConfig } from "@/config";
-import { fetchCookies } from "@/utils/cookies";
 
 interface CourseContextProps {
     filteredCourses: Course[] | null;
