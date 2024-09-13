@@ -1,5 +1,5 @@
 "use client";
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, IconButton, Modal, Box } from "@mui/material";
+import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, IconButton, Modal, Box, Chip } from "@mui/material";
 import { Course } from "../../models/course";
 import { useContext, useMemo, useState } from "react";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
@@ -11,6 +11,7 @@ import { KUALI_DETAILS_BASE_URL } from "../../constants/links";
 import { Else, If, Then } from "react-if";
 import { CourseContext } from "./CourseContext";
 import { titleCase } from "../../utils/string";
+import { electiveTypeColors } from "@/constants/colors";
 
 const style = {
   position: "absolute" as "absolute",
@@ -97,7 +98,9 @@ const CourseTable = () => {
                     </Else>
                   </If>
                 </TableCell>
-                <TableCell sx={{ width: 50 }}>{titleCase(course.elective_type)}</TableCell>
+                <TableCell sx={{ width: 50 }}>
+                  <Chip label={titleCase(course.elective_type)} sx={{ bgcolor: electiveTypeColors[course.elective_type] }} />
+                </TableCell>
                 <TableCell sx={{ width: 50 }}>{`${course.course_type} ${course.course_number}`}</TableCell>
                 <TableCell sx={{ width: 500 }} dangerouslySetInnerHTML={{ __html: course.description }} />
                 <TableCell align='center'>
