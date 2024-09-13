@@ -25,6 +25,13 @@ export async function GET() {
     {
       const res = await getFreshCourses(supabase);
       data = res.data as Course[];
+      data.sort((a, b) => {
+        const courseTypeComparison = a.course_type.localeCompare(b.course_type);
+        if (courseTypeComparison === 0) {
+          return parseInt(a.course_number) - parseInt(b.course_number);
+        }
+        return courseTypeComparison;
+      });
       cache.data = res.data as Course[];
       cache.timestamp = new Date();
     }

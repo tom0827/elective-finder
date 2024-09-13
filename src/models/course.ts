@@ -2,7 +2,7 @@ export interface Course {
     id: string,
     program: string,
     course_type: string,
-    course_number: boolean,
+    course_number: string,
     is_offered: boolean,
     term: string
     description: string,
