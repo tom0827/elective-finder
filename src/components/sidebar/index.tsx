@@ -1,7 +1,7 @@
 "use client";
 import Grid from "@mui/material/Grid2";
 import { InputLabel, MenuItem, Select, SelectChangeEvent, Switch, useColorScheme } from "@mui/material";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CourseContext } from "../courses/CourseContext";
 import { SELECT_ALL_OPTION } from "../../constants/util";
 import { LightDarkSwitch } from "../shared/StyledSwitch";
@@ -74,10 +74,14 @@ const Sidebar = () => {
         flexGrow: 1,
       }} />
       <Grid size={{ xs: 12 }} sx={{ paddingBottom: 4 }}>
-        <LightDarkSwitch defaultChecked value={mode} onChange={() => {
-          const isDark = mode === "dark";
-          setMode(isDark ? "light" : "dark");
-        }}/>
+        <LightDarkSwitch 
+          value={mode} 
+          onChange={() => {
+            const isLight = mode == "light";
+            setMode(isLight ? "dark" : "light");
+          }} 
+          checked={mode === "dark"}
+        />
       </Grid> 
     </Grid>
   );
