@@ -2,6 +2,7 @@ import { Course } from "@/models/course";
 import { createClient, SupabaseClient } from "@supabase/supabase-js";
 import { getFreshCourses } from "./courses";
 import { isExpired } from "@/utils/date";
+import { fixHyperLinks } from "@/utils/string";
 
 const CACHE_DURATION = 1000 * 60 * 60 * 24; // 1 day in milliseconds
 
@@ -32,7 +33,8 @@ export async function GET() {
         }
         return courseTypeComparison;
       });
-      cache.data = res.data as Course[];
+      data = fixHyperLinks(data);
+      cache.data = data as Course[];
       cache.timestamp = new Date();
     }
 

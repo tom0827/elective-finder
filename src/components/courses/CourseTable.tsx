@@ -1,5 +1,5 @@
 "use client";
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, IconButton, Modal, Box, Chip, useTheme } from "@mui/material";
+import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, IconButton, Modal, Box, Chip, useTheme, GlobalStyles } from "@mui/material";
 import { Course } from "../../models/course";
 import { useContext, useMemo, useState } from "react";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
@@ -175,7 +175,16 @@ const CourseTable = () => {
           >
             <CloseIcon />
           </IconButton>
-          <div dangerouslySetInnerHTML={{ __html: preCoReqHtml }} />
+          <GlobalStyles styles={{
+            ".preCoReqContainer a": {
+              color: "lightblue",
+              textDecoration: "underline",
+            },
+            ".preCoReqContainer a:hover": {
+              color: "blue",
+            },
+          }} />
+          <div className="preCoReqContainer" dangerouslySetInnerHTML={{ __html: preCoReqHtml }} />
         </Box>
       </Modal>
     </>
