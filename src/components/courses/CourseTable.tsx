@@ -99,7 +99,13 @@ const CourseTable = () => {
                   </If>
                 </TableCell>
                 <TableCell sx={{ width: 50 }}>
-                  <Chip label={titleCase(course.elective_type)} sx={{ bgcolor: electiveTypeColors[course.elective_type] }} />
+                  <Chip label={titleCase(course.elective_type)} sx={{
+                    bgcolor: electiveTypeColors[course.elective_type],
+                    color: "white",
+                    fontSize: 14,
+                    fontWeight: "bold",
+                    letterSpacing: 1,
+                  }} />
                 </TableCell>
                 <TableCell sx={{ width: 50 }}>{`${course.course_type} ${course.course_number}`}</TableCell>
                 <TableCell sx={{ width: 500 }} dangerouslySetInnerHTML={{ __html: course.description }} />
