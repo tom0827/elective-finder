@@ -3,6 +3,8 @@ import useDeviceType from "@/hooks/deviceType";
 import { CourseProvider } from "../components/courses/CourseContext";
 import CourseList from "../components/courses/CourseList";
 import { Box, Modal } from "@mui/material";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+
 
 const style = {
   position: "absolute" as "absolute",
@@ -14,6 +16,12 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
+
+const theme = createTheme({
+  colorSchemes: {
+    dark: true,
+  },
+});
 
 export default function Courses() {
   const isMobile = useDeviceType();
@@ -35,9 +43,11 @@ export default function Courses() {
 
   return (
     <>
-      <CourseProvider>
-        <CourseList />
-      </CourseProvider>
+      <ThemeProvider theme={theme} disableTransitionOnChange>
+        <CourseProvider>
+          <CourseList />
+        </CourseProvider>
+      </ThemeProvider>
     </>
   );
 }

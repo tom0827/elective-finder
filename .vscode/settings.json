@@ -8,6 +8,8 @@
     "editor.defaultFormatter": "denoland.vscode-deno"
   },
   "cSpell.words": [
+    "corequisites",
+    "KUALI",
     "SUPABASE"
   ]
 }

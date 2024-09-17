@@ -1,5 +1,5 @@
 "use client";
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, IconButton, Modal, Box } from "@mui/material";
+import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, IconButton, Modal, Box, Chip } from "@mui/material";
 import { Course } from "../../models/course";
 import { useContext, useMemo, useState } from "react";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
@@ -11,6 +11,7 @@ import { KUALI_DETAILS_BASE_URL } from "../../constants/links";
 import { Else, If, Then } from "react-if";
 import { CourseContext } from "./CourseContext";
 import { titleCase } from "../../utils/string";
+import { electiveTypeColors } from "@/constants/colors";
 
 const style = {
   position: "absolute" as "absolute",
@@ -30,7 +31,7 @@ const CourseTable = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [preCoReqHtml, setPreCoRegHtml] = useState<string>("");
   const [page, setPage] = useState<number>(0);
-  const [rowsPerPage, setRowsPerPage] = useState<number>(5);
+  const [rowsPerPage, setRowsPerPage] = useState<number>(10);
 
   const handlePageChange = (event: unknown, newPage: number) => {
     setPage(newPage);
@@ -51,8 +52,11 @@ const CourseTable = () => {
 
   return (
     <>
-      <TableContainer component={Paper}>
-        <Table>
+      <TableContainer component={Paper} sx={{
+        maxHeight: "calc(100vh - 52px)",
+        overflowY: "auto",
+      }}>
+        <Table stickyHeader>
           <TableHead>
             <TableRow>
               <TableCell align='center' sx={{
@@ -74,7 +78,7 @@ const CourseTable = () => {
               <TableCell align='center' sx={{
                 fontWeight: "bold",
                 width: 150, 
-              }}>See pre and co requisites</TableCell>
+              }}>View Prerequisites</TableCell>
               <TableCell align='center' sx={{
                 fontWeight: "bold",
                 width: 150, 
@@ -94,7 +98,15 @@ const CourseTable = () => {
                     </Else>
                   </If>
                 </TableCell>
-                <TableCell sx={{ width: 50 }}>{titleCase(course.elective_type)}</TableCell>
+                <TableCell sx={{ width: 50 }}>
+                  <Chip label={titleCase(course.elective_type)} sx={{
+                    bgcolor: electiveTypeColors[course.elective_type],
+                    color: "white",
+                    fontSize: 14,
+                    fontWeight: "bold",
+                    letterSpacing: 1,
+                  }} />
+                </TableCell>
                 <TableCell sx={{ width: 50 }}>{`${course.course_type} ${course.course_number}`}</TableCell>
                 <TableCell sx={{ width: 500 }} dangerouslySetInnerHTML={{ __html: course.description }} />
                 <TableCell align='center'>
@@ -109,7 +121,7 @@ const CourseTable = () => {
                       </IconButton>
                     </Then>
                     <Else>
-                        No pre/co requisites
+                        No Prerequisites
                     </Else>
                   </If>
                 </TableCell>
@@ -131,7 +143,10 @@ const CourseTable = () => {
         </Table>
       </TableContainer>
       <TablePagination
-        rowsPerPageOptions={[5, 10]} 
+        sx={{ 
+          backgroundColor: "background.default",
+        }}
+        rowsPerPageOptions={[5, 10, 25]} 
         component={"div"} 
         count={filteredCourses?.length || 0} 
         rowsPerPage={rowsPerPage} 
