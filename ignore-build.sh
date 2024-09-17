@@ -1,10 +1,14 @@
-# Get the current branch name
-BRANCH=$(git rev-parse --abbrev-ref HEAD)
+#!/bin/bash
 
-# Allow only 'main' and 'develop' branches
-if [[ "$BRANCH" != "main" && "$BRANCH" != "develop" ]]; then
-    echo "Skipping build for branch $BRANCH"
-    exit 1  # Non-zero exit code will stop the build
+echo "VERCEL_GIT_COMMIT_REF: $VERCEL_GIT_COMMIT_REF"
+
+if [[ "$VERCEL_GIT_COMMIT_REF" == "staging" || "$VERCEL_GIT_COMMIT_REF" == "main"  ]] ; then
+  # Proceed with the build
+    echo "✅ - Build can proceed"
+  exit 1;
+
+else
+  # Don't build
+  echo "🛑 - Build cancelled"
+  exit 0;
 fi
-
-echo "Building for branch $BRANCH"
