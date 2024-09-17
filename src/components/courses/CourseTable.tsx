@@ -1,5 +1,5 @@
 "use client";
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, IconButton, Modal, Box, Chip } from "@mui/material";
+import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, IconButton, Modal, Box, Chip, useTheme } from "@mui/material";
 import { Course } from "../../models/course";
 import { useContext, useMemo, useState } from "react";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
@@ -13,25 +13,13 @@ import { CourseContext } from "./CourseContext";
 import { titleCase } from "../../utils/string";
 import { electiveTypeColors } from "@/constants/colors";
 
-const style = {
-  position: "absolute" as "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "1px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
-
 const CourseTable = () => {
   const { filteredCourses } = useContext(CourseContext);
-
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [preCoReqHtml, setPreCoRegHtml] = useState<string>("");
   const [page, setPage] = useState<number>(0);
   const [rowsPerPage, setRowsPerPage] = useState<number>(10);
+  const theme = useTheme();
 
   const handlePageChange = (event: unknown, newPage: number) => {
     setPage(newPage);
@@ -161,7 +149,18 @@ const CourseTable = () => {
           setPreCoRegHtml("");
         }}
       >
-        <Box sx={style}>
+        <Box sx={{
+          position: "absolute" as "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          width: 400,
+          bgcolor: "background.paper",
+          color: theme.palette.text.primary,
+          border: "1px solid #000",
+          boxShadow: 24,
+          p: 4,
+        }}>
           <IconButton
             aria-label="close"
             onClick={() => {
