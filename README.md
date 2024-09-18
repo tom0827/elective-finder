@@ -4,9 +4,11 @@ Elective Finder is a web application built with [Next.js](https://nextjs.org/) t
 
 ## Table of Contents
 
-- [Features](#installation)
+- [Features](#features)
 - [Live Demo](#live-demo)
 - [Dev Setup](#dev-setup)
+- [Contributing](#contributing)
+
 
 
 ## Features
@@ -19,19 +21,34 @@ Elective Finder is a web application built with [Next.js](https://nextjs.org/) t
 - See the course pre/co requisites
 
 
-## Live Demo
+## Try It Out for Yourself
 
 Check out the live version of the project here: [Elective Finder](https://electivefinder.ca)
 
 
 ## Dev Setup
 
- 1. Fork the repository
- 2. Clone your fork
- 3. Navigate to root folder
- 4. Create a .env.local file and configure required environment variables
- 5. ```npm install```
- 6. ```npm run dev```
- 7. Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
- 
+1. Fork the repository
+2. Clone your fork
+3. Navigate to root folder
+4. Create a .env.local file and configure required environment variables
+5. ```npm install```
+6. ```npm run dev```
+7. Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
 
+
+## Contributing
+
+We welcome contributions to Elective Finder! If you would like to contribute, please follow these steps:
+
+1. Follow the [Dev Setup](#dev-setup):
+Set up your local development environment by following the instructions in the Dev Setup section.
+2. Checkout to develop
+```git checkout develop```
+3. Create a new branch
+```git checkout -b <branch-name>```
+4. Commit your changes
+```git commit -m "description of changes made"```
+5. Push your changes
+```git push```
+6. Submit a pull request
