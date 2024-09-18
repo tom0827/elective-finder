@@ -1,7 +1,7 @@
 "use client";
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, IconButton, Modal, Box, Chip, useTheme, GlobalStyles } from "@mui/material";
 import { Course } from "../../models/course";
-import { useContext, useMemo, useState } from "react";
+import { LegacyRef, useContext, useEffect, useMemo, useRef, useState } from "react";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import CheckIcon from "@mui/icons-material/Check";
@@ -14,12 +14,13 @@ import { titleCase } from "../../utils/string";
 import { electiveTypeColors } from "@/constants/colors";
 
 const CourseTable = () => {
-  const { filteredCourses } = useContext(CourseContext);
+  const { filteredCourses, isOffered, selectedProgram, selectedElective, selectedTerm } = useContext(CourseContext);
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [preCoReqHtml, setPreCoRegHtml] = useState<string>("");
   const [page, setPage] = useState<number>(0);
   const [rowsPerPage, setRowsPerPage] = useState<number>(10);
   const theme = useTheme();
+  const tableContainerRef = useRef<HTMLDivElement>(null); // Reference to TableContainer
 
   const handlePageChange = (event: unknown, newPage: number) => {
     setPage(newPage);
@@ -38,9 +39,14 @@ const CourseTable = () => {
     [filteredCourses, page, rowsPerPage],
   );
 
+  useEffect(() => {
+    tableContainerRef?.current?.scrollTo(0, 0);
+    setPage(0);
+  }, [isOffered, selectedProgram, selectedElective, selectedTerm]);
+
   return (
     <>
-      <TableContainer component={Paper} sx={{
+      <TableContainer ref={tableContainerRef} component={Paper} sx={{
         maxHeight: "calc(100vh - 52px)",
         overflowY: "auto",
       }}>
