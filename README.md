@@ -1,6 +1,7 @@
 # Elective Finder
 
-Elective Finder is a web application built with [Next.js](https://nextjs.org/) that simplifies the process of finding available elective courses for the various engineering disciplines offered at UVic. The goal is to streamline the search for electives based on user preferences, making it easier for students to discover courses that suit their academic needs.
+Elective Finder is a web application built with [Next.js](https://nextjs.org/) that simplifies the process of finding pre approved elective courses for the various engineering disciplines offered at UVic. The goal is to streamline the search for electives based on user preferences, making it easier for students to discover courses that suit their academic needs.
+
 
 ## Table of Contents
 
@@ -8,7 +9,6 @@ Elective Finder is a web application built with [Next.js](https://nextjs.org/) t
 - [Live Demo](#live-demo)
 - [Dev Setup](#dev-setup)
 - [Contributing](#contributing)
-
 
 
 ## Features
@@ -39,11 +39,9 @@ Check out the live version of the project here: [Elective Finder](https://electi
 
 ## Contributing
 
-We welcome contributions to Elective Finder! If you would like to contribute, please follow these steps:
-
 1. Follow the [Dev Setup](#dev-setup):
 Set up your local development environment by following the instructions in the Dev Setup section.
-2. Checkout to develop
+2. Checkout to the develop branch
 ```git checkout develop```
 3. Create a new branch
 ```git checkout -b <branch-name>```
