@@ -1,7 +1,7 @@
 "use client";
 import Grid from "@mui/material/Grid2";
 import { InputLabel, MenuItem, Select, SelectChangeEvent, Switch, useColorScheme } from "@mui/material";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { CourseContext } from "../courses/CourseContext";
 import { SELECT_ALL_OPTION } from "../../constants/util";
 import { LightDarkSwitch } from "../shared/StyledSwitch";
@@ -21,6 +21,17 @@ const Sidebar = () => {
     selectedTerm,
   } = useContext(CourseContext);
   const { mode, setMode } = useColorScheme();
+  
+  useEffect(() => {
+    if (mode != "system") return;
+    const prefersDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    if (prefersDarkMode) {
+      setMode("dark");
+    }
+    else {
+      setMode("light");
+    }
+  });
     
   return (
     <Grid container direction={"column"} spacing={2} sx={{
