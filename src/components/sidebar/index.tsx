@@ -73,7 +73,7 @@ const Sidebar = () => {
       <Grid size={{ xs: 12 }} sx={{
         flexGrow: 1,
       }} />
-      <Grid size={{ xs: 12 }} sx={{ paddingBottom: 4 }}>
+      <Grid size={{ xs: 12 }} sx={{ paddingBottom: 6 }}>
         <LightDarkSwitch 
           value={mode} 
           onChange={() => {
