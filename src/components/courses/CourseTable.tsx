@@ -1,12 +1,14 @@
 "use client";
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, IconButton, Modal, Box, Chip, useTheme, GlobalStyles } from "@mui/material";
+import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, IconButton, Modal, Box, Chip, useTheme, GlobalStyles, TextField, Stack } from "@mui/material";
 import { Course } from "../../models/course";
-import { LegacyRef, useContext, useEffect, useMemo, useRef, useState } from "react";
+import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import CheckIcon from "@mui/icons-material/Check";
 import ClearIcon from "@mui/icons-material/Clear";
 import CloseIcon from "@mui/icons-material/Close";
+import SearchIcon from "@mui/icons-material/Search";
+import SearchOffIcon from "@mui/icons-material/SearchOff";
 import { KUALI_DETAILS_BASE_URL } from "../../constants/links";
 import { Else, If, Then } from "react-if";
 import { CourseContext } from "./CourseContext";
@@ -14,15 +16,17 @@ import { titleCase } from "../../utils/string";
 import { electiveTypeColors } from "@/constants/colors";
 
 const CourseTable = () => {
-  const { filteredCourses, isOffered, selectedProgram, selectedElective, selectedTerm } = useContext(CourseContext);
+  const { filteredCourses, isOffered, selectedProgram, selectedElective, selectedTerm, setSearchText } = useContext(CourseContext);
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [preCoReqHtml, setPreCoRegHtml] = useState<string>("");
   const [page, setPage] = useState<number>(0);
   const [rowsPerPage, setRowsPerPage] = useState<number>(10);
   const theme = useTheme();
-  const tableContainerRef = useRef<HTMLDivElement>(null); // Reference to TableContainer
+  const tableContainerRef = useRef<HTMLDivElement>(null);
+  const [searching, setSearching] = useState<boolean>(false);
 
   const handlePageChange = (event: unknown, newPage: number) => {
+    tableContainerRef?.current?.scrollTo(0, 0);
     setPage(newPage);
   };
   const handleRowsPerPageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -63,8 +67,45 @@ const CourseTable = () => {
               }}>Elective Type</TableCell>
               <TableCell sx={{
                 fontWeight: "bold",
-                width: 50, 
-              }}>Course</TableCell>
+                width: 150, 
+              }}>
+                <Stack direction={"row"} alignItems={"center"}>
+                  <If condition={searching}>
+                    <Then>
+                      <TextField
+                        autoFocus
+                        variant="outlined" 
+                        label="Course Code"
+                        slotProps={{
+                          inputLabel: {
+                            sx: {
+                              fontWeight: "bold",
+                              color: "theme.palette.text.primary",
+                            },
+                          },
+                        }}
+                        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                          setSearchText(event?.target.value);
+                        }}
+                      />
+                      <IconButton aria-label="search-off" onClick={() => {
+                        setSearching(false);
+                        setSearchText("");
+                      }}>
+                        <SearchOffIcon />
+                      </IconButton>
+                    </Then>
+                    <Else>
+                    Course Code
+                      <IconButton aria-label="search-on" onClick={() => setSearching(true)}>
+                        <SearchIcon />
+                      </IconButton>
+                    </Else>
+                  </If>
+                  
+                </Stack>
+                
+              </TableCell>
               <TableCell sx={{
                 fontWeight: "bold",
                 width: 500, 
@@ -156,7 +197,7 @@ const CourseTable = () => {
         }}
       >
         <Box sx={{
-          position: "absolute" as "absolute",
+          position: "absolute",
           top: "50%",
           left: "50%",
           transform: "translate(-50%, -50%)",

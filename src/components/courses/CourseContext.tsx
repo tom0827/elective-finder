@@ -4,7 +4,7 @@ import { Course } from "../../models/course";
 import { formatDateAsMonthYear } from "../../utils/date";
 import { SelectItem } from "../../models/select";
 import { titleCase } from "../../utils/string";
-import { filterOffered, filterProgram, filterElectiveTypes, filterTerm } from "./CourseFilters";
+import { filterOffered, filterProgram, filterElectiveTypes, filterTerm, filterByCourseSearch } from "./CourseFilters";
 
 interface CourseContextProps {
     filteredCourses: Course[] | null;
@@ -20,6 +20,7 @@ interface CourseContextProps {
     selectedTerm: string;
     setSelectedTerm: Dispatch<SetStateAction<string>>;
     loading: boolean;
+    setSearchText: Dispatch<SetStateAction<string>>;
 }
   
 export const CourseContext = createContext<CourseContextProps>({
@@ -44,6 +45,9 @@ export const CourseContext = createContext<CourseContextProps>({
     return;
   },
   loading: true,
+  setSearchText: () => {
+    return;
+  },
 });
 
 export const CourseProvider = ({ children }: { children: JSX.Element | JSX.Element[] }) => {
@@ -54,6 +58,7 @@ export const CourseProvider = ({ children }: { children: JSX.Element | JSX.Eleme
   const [selectedElective, setSelectedElective] = useState<string>("ALL");
   const [selectedTerm, setSelectedTerm] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
+  const [searchText, setSearchText] = useState<string>("");
   
   useEffect(() => {
     const loadCourses = async () => {
@@ -74,8 +79,9 @@ export const CourseProvider = ({ children }: { children: JSX.Element | JSX.Eleme
     filteredCourses = filterProgram(filteredCourses, selectedProgram, selectedElective);
     filteredCourses = filterElectiveTypes(filteredCourses, selectedElective);
     filteredCourses = filterTerm(filteredCourses, selectedTerm);
+    filteredCourses = filterByCourseSearch(filteredCourses, searchText);
     setFilteredCourses(filteredCourses);
-  }, [isOffered, selectedProgram, selectedElective, selectedTerm, courses]);
+  }, [isOffered, selectedProgram, selectedElective, selectedTerm, courses, searchText]);
 
   const programOptions = useMemo(() => {
     const uniquePrograms = Array.from(new Set(courses?.map(course => course.program)))
@@ -128,7 +134,8 @@ export const CourseProvider = ({ children }: { children: JSX.Element | JSX.Eleme
       setSelectedElective,
       selectedTerm,
       setSelectedTerm, 
-      loading, 
+      loading,
+      setSearchText,
     }}>
       {children}
     </CourseContext.Provider>
