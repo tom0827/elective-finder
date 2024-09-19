@@ -24,7 +24,9 @@ const Sidebar = () => {
   
   useEffect(() => {
     if (mode != "system") return;
+    
     const prefersDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
     if (prefersDarkMode) {
       setMode("dark");
     }
