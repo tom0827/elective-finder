@@ -5,7 +5,10 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Elective Finder",
-  description: "Find electives easily for a better academic experience.",
+  description: "Easily find relevant electives.",
+  icons: {
+    icon: "/favicon-32x32.png",
+  },
 };
 
 export default function RootLayout({
